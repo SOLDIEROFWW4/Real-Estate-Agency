@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Footer from './mainPage/Footer';
-import Header from '../header/Header';
+import Footer from './Footer';
+import Header from '../../header/Header';
 
 const MainPage = () => {
   return (
