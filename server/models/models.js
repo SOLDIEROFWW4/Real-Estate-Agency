@@ -1,4 +1,4 @@
-const sequelize = require('..');
+const sequelize = require('.');
 const { DataTypes } = require('sequelize');
 
 const User = sequelize.define('User', {
@@ -43,7 +43,6 @@ const Admin = sequelize.define('Admin', {
 
 const Contact = sequelize.define('Contact', {
     Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    type: {type: DataTypes.STRING, allowNull: false},
     value: {type: DataTypes.STRING, allowNull: false}
 });
 
@@ -55,7 +54,7 @@ const ContactType = sequelize.define('ContactType', {
 const Deal = sequelize.define('Deal', {
     Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     isClosed: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false},
-    isSold: { type: DataTypes.BOOLEAN, allowNull: false}
+    isSold: { type: DataTypes.BOOLEAN, allowNull: false},
 });
 
 Property.belongsTo(PropertyType);
