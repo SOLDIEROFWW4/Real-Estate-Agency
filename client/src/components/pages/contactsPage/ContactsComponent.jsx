@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Button, ListItem } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import contactsImage from "../img/contacts.jpg";
 import { getContacts } from "../../api/contactsApi";
 
@@ -40,12 +40,12 @@ const ContactsComponent = () => {
         const loadData = async () => {
           try {
             const contactsDataResponse = await getContacts();
-
+      
             if (!contactsDataResponse) {
               console.log("Сервис временно недоступен");
               return;
             }
-
+      
             if (contactsDataResponse.status === 401) {
               localStorage.removeItem("token");
               localStorage.removeItem("role");
@@ -54,7 +54,7 @@ const ContactsComponent = () => {
               window.location.reload();
               return;
             }
-
+      
             if (contactsDataResponse.status >= 300) {
               console.log("Ошибка при загрузке контактов. Код: " + contactsDataResponse.status);
               console.log(contactsDataResponse);
@@ -66,10 +66,10 @@ const ContactsComponent = () => {
             console.error('Error loading data:', error);
           }
         };
-
+      
         loadData();
       }, []);
-
+  
     return (
       <div class={classes.root}>
         <div class={classes.container}>

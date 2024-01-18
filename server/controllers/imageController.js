@@ -8,7 +8,7 @@ class ImageController {
             const images = await Image.findAll({
                 where: { propertyId: propertyId }
             });
-
+    
             return res.json(images);
         }
         catch (err) {
@@ -23,7 +23,7 @@ class ImageController {
             const { image } = req.params;
 
             const createdImage = await Image.create(image);
-
+    
             return res.status(201).json(createdImage);
         }
         catch (err) {

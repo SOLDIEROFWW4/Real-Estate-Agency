@@ -7,10 +7,8 @@ import ContactsComponent from './contactsPage/ContactsComponent';
 const ContactsPage = () => {
   return (
     <div>
-      <Header /> 
-
+      <Header />  
       <ContactsComponent />
-      
       <Footer />
     </div>
   );

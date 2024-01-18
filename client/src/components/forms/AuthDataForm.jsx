@@ -82,7 +82,7 @@ const AuthDataForm = ({ onNext, setUserData }) => {
       email: email,
       password: password,
     }));
-
+    
 
     // Handle successful validation
     onNext();

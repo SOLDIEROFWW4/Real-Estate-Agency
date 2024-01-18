@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 
 const MainInfo = () => {
     const classes = useStyles();
-
+  
     return (
       <div class={classes.root}>
         <div class={classes.container}>

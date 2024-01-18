@@ -97,7 +97,7 @@ const PersonalInfoForm = ({userData, setUserData}) => {
   const [birthdate, setBirthdate] = useState('');
 
 
-
+  
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -120,7 +120,7 @@ const PersonalInfoForm = ({userData, setUserData}) => {
       phone: phone,
       birthDate: birthdate,
     }));
-
+    
 
     registerUser(userData)
       .then((response) => {

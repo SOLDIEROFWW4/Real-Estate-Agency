@@ -1,7 +1,6 @@
 const { User } = require("../models/models");
 const bcrypt = require("bcrypt");
 
-
 class UserController {
     async getAll(req, res) {
         try {
@@ -27,7 +26,7 @@ class UserController {
 
         try {
             const user = await User.findOne({
-                where: { id: id },
+                where: { Id: id },
                 attributes: { exclude: ["password"] },
             });
 
@@ -75,13 +74,13 @@ class UserController {
         const { id } = req.params;
 
         const user = { ...req.body };
-
-        if (isNaN(id) || parseInt(id) !== user.id) {
+        console.log(user);
+        if (isNaN(id) || parseInt(id) !== user.Id) {
             return res.sendStatus(400);
         }
 
         try {
-            const existingUser = await User.findOne({ where: { id: id } });
+            const existingUser = await User.findOne({ where: { Id: id } });
 
             if (existingUser == null) {
                 return res.sendStatus(404);
@@ -93,7 +92,7 @@ class UserController {
                 }
             } 
 
-            await User.update(user, { where: { id: id } });
+            await User.update(user, { where: { Id: id } });
 
             return res.sendStatus(204);
         }

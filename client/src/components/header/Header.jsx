@@ -16,7 +16,7 @@ const Header = () => {
     sessionStorage.removeItem("role");
     window.location.reload();
   };
-
+  
   const [scale, setScale] = useState(0.65);
 
   useEffect(() => {
@@ -56,8 +56,8 @@ const Header = () => {
           }} 
         />
 
-         {/* Кнопки */}
-         <div>
+        {/* Кнопки */}
+        <div>
             {/*Каталог*/}
           <Button variant="text" color="inherit"
           onClick={() => {

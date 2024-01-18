@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { publicRoutes } from "./publicRoutes";
 import { userRoutes } from "./userRoutes";
-import { adminRoutes } from "./AdminRoutes";
+import { adminRoutes } from "./adminRoutes";
 import { ADMIN_ORDERS_ROUTE, LOGIN_ROUTE, USER_MAIN_MENU_ROUTE } from "../utils/consts";
 
 const AppRouter = () => {
