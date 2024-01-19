@@ -14,7 +14,7 @@ const User = sequelize.define('User', {
 const Property = sequelize.define('Property', {
     Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.STRING, allowNull: false },
+    description: { type: DataTypes.STRING(3000), allowNull: false },
     price: { type: DataTypes.INTEGER, allowNull: false },
     isSold: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false}
 });

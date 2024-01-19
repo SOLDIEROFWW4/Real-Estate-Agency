@@ -7,6 +7,7 @@ import logo from "./img/logo.png";
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
+    fontFamily: "'Helvetica', 'Arial', sans-serif",
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -29,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
     width: '206px',
     height: '167px',
     backgroundImage: `url(${logo})`,
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat'
   },
   input: {
     marginBottom: '1rem',
@@ -82,6 +84,7 @@ const LoginPage = () => {
       }
 
       if (response.status >= 300) {
+        alert("Неверные данные аккаунта");
           console.log("Неверные данные аккаунта");
           return;
       }
@@ -134,7 +137,11 @@ const LoginPage = () => {
         <Button
           className={classes.button}
           variant="contained"
-          
+          style={
+            {
+                backgroundColor: "#1C3988"
+            }
+          }
           onClick={submit}
         >
           Войти

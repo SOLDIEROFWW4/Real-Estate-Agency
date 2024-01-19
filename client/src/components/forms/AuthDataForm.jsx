@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
     width: '206px',
     height: '167px',
     backgroundImage: `url(${logo})`,
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat'
   },
   input: {
     marginBottom: '1rem',
@@ -73,6 +74,7 @@ const AuthDataForm = ({ onNext, setUserData }) => {
     }
 
     if (password !== confirmPassword) {
+        alert("Пароли не совпадают");
       setPasswordError("Пароли не совпадают");
       return;
     }
@@ -120,6 +122,11 @@ const AuthDataForm = ({ onNext, setUserData }) => {
         />
         <Button
           className={classes.button}
+          style={
+            {
+                backgroundColor: "#1C3988"
+            }
+          }
           variant="contained"
           type="submit"
         >

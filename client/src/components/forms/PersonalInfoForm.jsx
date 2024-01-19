@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
     width: '206px',
     height: '167px',
     backgroundImage: `url(${logo})`,
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat'
   },
   input: {
     width: '100%',
@@ -184,6 +185,11 @@ const PersonalInfoForm = ({userData, setUserData}) => {
         <Button
           className={classes.button}
           variant="contained"
+          style={
+            {
+                backgroundColor: "#1C3988"
+            }
+          }
           onClick={handleRegister}
         >
           Готово
