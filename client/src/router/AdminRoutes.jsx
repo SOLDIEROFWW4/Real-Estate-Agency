@@ -2,9 +2,10 @@ import AdminPropertiesPage from "../components/pages/AdminPanel/AdminPropertiesP
 import DealsPage from "../components/pages/AdminPanel/DealsPage";
 import MainPage from "../components/pages/MainPage";
 import ContactsPage from "../components/pages/ContactsPage";
-import ReviewsPage from "../components/pages/ReviewsPage";
+import ReviewsPage from "../components/pages/AdminPanel/AdminReviews";
 import PropertiesPage from "../components/pages/PropertiesPage";
 import PropertyPage from "../components/pages/PropertyPage";
+import FAQPage from "../components/pages/FAQPage";
 
 export const adminRoutes = [
     {
@@ -24,7 +25,7 @@ export const adminRoutes = [
         Component: ContactsPage,
     },
     {
-        path: "/reviews",
+        path: "/admin-reviews",
         Component: ReviewsPage,
     },
     {
@@ -34,5 +35,9 @@ export const adminRoutes = [
     {
         path: "/properties/:id",
         Component: PropertyPage,
+    },
+    {
+        path: "/faq",
+        Component: FAQPage,
     },
 ];

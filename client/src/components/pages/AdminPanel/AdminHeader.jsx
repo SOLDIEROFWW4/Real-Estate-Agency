@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AppBar, Toolbar, IconButton, Button } from "@mui/material";
 import { Box } from "@mui/system";
-import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import logo from "../../header/logo.png";
 import { useNavigate } from "react-router-dom";
@@ -75,7 +74,7 @@ const Header = () => {
           {/*Отзывы*/}
           <Button variant="text" color="inherit"
           onClick={() => {
-            navigate("/reviews");
+            navigate("/admin-reviews");
             window.location.reload()
           }}
           style={{
@@ -108,10 +107,22 @@ const Header = () => {
           style={{
             color: 'black',
             fontSize: '15pt',
-            textTransform: 'none',
-            fontFamily: 'Open Sans'
+            textTransform: 'none'
           }} >
             Сделки
+          </Button>
+
+          <Button variant="text" color="inherit"
+          onClick={() => {
+            navigate("/faq");
+            window.location.reload()
+          }}
+          style={{
+            color: 'black',
+            fontSize: '15pt',
+            textTransform: 'none'
+          }} >
+            FAQ
           </Button>
         </div>
 

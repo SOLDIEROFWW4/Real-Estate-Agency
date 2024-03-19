@@ -1,11 +1,12 @@
 const { Property, PropertyType } = require('../models/models');
 const path = require("path");
 const fs = require("fs");
+const { Op } = require('sequelize');
 
 class PropertyController {
     async getAll(req, res) {
         try {
-            const properties = await Property.findAll({ include: PropertyType });
+            const properties = await Property.findAll({ include: { model: PropertyType  }});
     
             return res.json(properties);
         }
@@ -22,7 +23,7 @@ class PropertyController {
 
             const properties = await Property.findAll({
                 where: { IsSold: false, propertyTypeId: propertyTypeId },
-                include: PropertyType
+                include: { model: PropertyType }
             });
     
             return res.json(properties);
@@ -57,8 +58,8 @@ class PropertyController {
         try {
             const properties = await Property.findAll({
                 where: { isSold: false },
-                include: PropertyType
-            });
+                include: { model: PropertyType } // Include the PropertyType model
+              });
     
             return res.json(properties);
         }
@@ -69,13 +70,59 @@ class PropertyController {
         }
     }
 
+    async filterProperties(req, res) {
+        try {
+            const { search, propertyTypeId, price, rooms } = req.query;
+
+            const properties = await Property.findAll({
+                where: {
+                  isSold: false,
+                  name: {
+                    [Op.iLike]: `%${search}%`,
+                  },
+                  price: price !== '0' ? { [Op.lt]: price } : { [Op.gt]: price },
+                  rooms: rooms !== '0' ? rooms : { [Op.gt]: rooms },
+                  PropertyTypeId: propertyTypeId !== '0' ? propertyTypeId : { [Op.ne]: null },
+                },
+                include: { model: PropertyType },
+              });
+    
+            return res.json(properties);
+        }
+        catch (err) {
+            console.error(err);
+
+            return res.sendStatus(500).json({ error: 'Ошибка сервера.' });
+        }
+    }
+
+    async getRecentlyAdded(req, res) {
+        try {
+          const properties = await Property.findAll({
+            where: { isSold: false },
+            include: { model: PropertyType },
+            order: [['createdAt', 'DESC']],
+            limit: 4
+          });
+      
+          return res.json(properties);
+        } catch (err) {
+          console.error(err);
+      
+          return res.status(500).json({ error: 'Ошибка сервера.' });
+        }
+      }
+
     async getCatalogProperty(req, res) {
         const { propertyId } = req.params;
     
         try {
-            const property = await Property.findByPk(propertyId);
+            const property = await Property.findOne({
+                where: { Id: propertyId },
+                include: { model: PropertyType }
+              });
     
-            if (!property || property.isSold == true) {
+            if (!property) {
                 return res.status(404).json({ error: 'Собственность не найдена.' });
             }
     

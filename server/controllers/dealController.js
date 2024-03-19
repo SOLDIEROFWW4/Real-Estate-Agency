@@ -1,4 +1,4 @@
-const { Deal, Property } = require('../models/models');
+const { Deal, Property, User, PropertyType } = require('../models/models');
 
 class DealController {
     async getOpenedDeals(req, res) {
@@ -16,6 +16,24 @@ class DealController {
         }
     }
 
+    async getClosedDeals(req, res) {
+        try {
+            const deals = await Deal.findAll({
+                where: { isClosed: true, isSold: true },
+                include: [
+                    { model: User },
+                    { model: Property }
+                ]
+            });
+    
+            return res.json(deals);
+        } catch (err) {
+            console.log(err);
+    
+            return res.status(500).json({ error: 'Ошибка сервера' });
+        }
+    }
+
     async getDealsOfUser(req, res) {
         try {
             const { userId } = req.params;
@@ -29,6 +47,7 @@ class DealController {
                 where: {
                     Id: propertyIds,
                 },
+                include: PropertyType
             });
 
             return res.json(properties);
@@ -49,10 +68,12 @@ class DealController {
             });
             
             const propertyIds = deals.map((deal) => deal.PropertyId);
+
             const properties = await Property.findAll({
                 where: {
                     Id: propertyIds,
                 },
+                include: PropertyType
             });
 
             return res.json(properties);

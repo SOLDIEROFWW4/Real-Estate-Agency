@@ -13,10 +13,11 @@ const User = sequelize.define('User', {
 
 const Property = sequelize.define('Property', {
     Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: DataTypes.STRING, allowNull: false },
+    name: { type: DataTypes.STRING(255), allowNull: false },
     description: { type: DataTypes.STRING(3000), allowNull: false },
     price: { type: DataTypes.INTEGER, allowNull: false },
-    isSold: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false}
+    isSold: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false},
+    rooms: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 1 }
 });
 
 const PropertyType = sequelize.define('PropertyType', {
@@ -46,17 +47,40 @@ const ContactType = sequelize.define('ContactType', {
     name: {type: DataTypes.STRING, allowNull: false},
 });
 
+const Agent = sequelize.define('Agent', {
+    Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    name: {type: DataTypes.STRING, allowNull: false},
+    phone: {type: DataTypes.STRING, allowNull: false}
+});
+
+const Speciality = sequelize.define('Speciality', {
+    Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    name: {type: DataTypes.STRING, allowNull: false},
+});
+
 const Deal = sequelize.define('Deal', {
     Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     isClosed: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false},
     isSold: { type: DataTypes.BOOLEAN, allowNull: false},
 });
 
+const Favorite = sequelize.define('Favorite', {
+    Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+});
+
 Property.belongsTo(PropertyType);
 PropertyType.hasMany(Property);
 
-Property.belongsToMany(User, { through: Deal });
-User.belongsToMany(Property, { through: Deal });
+User.hasMany(Deal);
+Deal.belongsTo(User);
+Property.hasMany(Deal);
+Deal.belongsTo(Property);
+
+Speciality.hasMany(Agent);
+Agent.belongsTo(Speciality);
+
+Property.belongsToMany(User, { through: Favorite });
+User.belongsToMany(Property, { through: Favorite });
 
 Review.belongsTo(User);
 User.hasMany(Review);
@@ -72,5 +96,8 @@ module.exports = {
     Contact,
     Review,
     ContactType,
-    Admin
+    Admin,
+    Favorite,
+    Agent,
+    Speciality
 };
